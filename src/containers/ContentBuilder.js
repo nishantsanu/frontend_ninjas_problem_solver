@@ -6,7 +6,7 @@ import TaDoubtContainer from './BodyContainer/TaDoubtContainer/TaDoubtContainer'
 import TeacherDashboard from './BodyContainer/TeacherDashboard/TeacherDashboard';
 import SolvingDoubt from './BodyContainer/TaDoubtContainer/SolvingDoubt';
 
-URL='http://localhost:8000';
+const URL='http://localhost:8000';
 class ContentBuilder extends Component {
     state = {
         post: [],
@@ -23,15 +23,7 @@ class ContentBuilder extends Component {
             .get(URL)
             .then((response) => {
                 console.log(response.data.doubts);
-                // let idx = 0;
                 let data = response.data.doubts;
-                // console.log(data);
-                // data.forEach((element) => {
-                //     console.log("small element");
-                //     // console.log(element);
-                //     element["key"] = idx++;
-                // });
-                // console.log(data);
                 this.setState({ post: data });
             })
             .catch((error) => {
@@ -62,6 +54,15 @@ class ContentBuilder extends Component {
         this.setState({posts:newList});
     }
 
+    addNewDoubt=(doubt)=>{
+        const oldDoubts=[...this.state.post];
+        oldDoubts.unshift(doubt);
+        this.setState({
+            post:oldDoubts
+        })
+        this.props.goToHomePage();
+    }
+
     containerToView = () => {
         console.log("container to view is " + this.props.activeContentArea);
         if(this.props.activeContentArea==='solvedoubts'){
@@ -69,12 +70,18 @@ class ContentBuilder extends Component {
         }else if(this.props.activeContentArea==='dashboard'){
             return <TeacherDashboard/>
         }else if(this.props.activeContentArea==='solvingdoubt'){
-            return <SolvingDoubt solvingDoubtData={this.props.solvingDoubtData}/>
+            return <SolvingDoubt solvingDoubtData={this.props.solvingDoubtData} setSolvingDoubtData={this.props.setSolvingDoubtData}/>
+        }else if(this.props.activeContentArea==='raisedoubt'){
+            return <RaiseDoubtContainer addNewDoubt={this.addNewDoubt}/>
+        }else{
+            return <Content posts={this.state.post} welcomeName={this.props.welcomeName} showBackdrop={this.state.showBackdrop}
+            loginButtonClick={this.loginModelHandler} 
+            updateCommentList={this.updateCommentList}/>
         }
-        return this.props.activeContentArea !== "raisedoubt" ?
-            <Content posts={this.state.post} welcomeName={this.props.welcomeName} showBackdrop={this.state.showBackdrop}
-                loginButtonClick={this.loginModelHandler} 
-                updateCommentList={this.updateCommentList}/> : <RaiseDoubtContainer />
+        // return this.props.activeContentArea !== "raisedoubt" ?
+        //     <Content posts={this.state.post} welcomeName={this.props.welcomeName} showBackdrop={this.state.showBackdrop}
+        //         loginButtonClick={this.loginModelHandler} 
+        //         updateCommentList={this.updateCommentList}/> : <RaiseDoubtContainer />
     }
 
     loginModelHandler = () => {

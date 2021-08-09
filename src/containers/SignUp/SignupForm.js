@@ -27,9 +27,14 @@ class SignupForm extends Component {
             }, { withCredentials: true })
             .then((response) => {
                 console.log(response);
-                if (response.status === 200) {
-                    console.log("message");
-                    message.success("Sign Up Successful");
+                if (response.status === 201) {
+                    console.log("signup success");
+                    localStorage.setItem('token', `Bearer ${response.data.data.token}`);
+                    localStorage.setItem('userType', response.data.user.userType);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
+                    axios.defaults.headers.common['Content-Type'] = 'application/json';
+
+                    this.props.afterSuccessfulLogin(response.data.user);
                 }
                 // else message.error("Oops something is wrong! Contact dev team");
             })
@@ -40,10 +45,10 @@ class SignupForm extends Component {
                 else message.error("Something went wrong :(");
             });
     }
-    dropDownHandler=(event)=>{
+    dropDownHandler = (event) => {
         console.log(event.target.value);
         this.setState({ userType: event.target.value });
-     }
+    }
     // userTypeHandler = (event) => {
     //     this.setState({ userType: event.target.value });
     // }

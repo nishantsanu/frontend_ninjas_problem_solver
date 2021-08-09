@@ -49,13 +49,12 @@ const navbar = (props) => {
                 class="btn btn-outline-success my-2 my-sm-0" type="button">Sign Out</button>
         </div>
 
-    console.log(props);
     return (
         <Auxx>
             <Backdrop show={props.showBackdrop} backDropClickHandler={props.backDropClickHandler} />
             <LoginForm showLoginForm={props.showLoginForm} afterSuccessfulLogin={props.afterSuccessfulLogin} />
-            <SignupForm showSignUpForm={props.showSignUpForm} />
-            <nav class="navbar navbar-expand-lg  header">
+            <SignupForm showSignUpForm={props.showSignUpForm} afterSuccessfulLogin={props.afterSuccessfulLogin} />
+            <nav class="navbar navbar-expand-sm  header">
                 {/* <a class="navbar-brand" href="#"> */}
                 <img src="https://files.codingninjas.in/new-logo-03-11984.svg" id="logo" />
 
@@ -68,7 +67,7 @@ const navbar = (props) => {
                     <ul class="navbar-nav mr-auto">
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="#" onClick={props.homeButtonClickedHandler}>Home</a>
                         </li>
                         <li class="nav-item" hidden={props.welcomeName !== 'student'} onClick={props.raiseDoubt}>
                             <a class="nav-link" href="#">Raise Doubts</a>

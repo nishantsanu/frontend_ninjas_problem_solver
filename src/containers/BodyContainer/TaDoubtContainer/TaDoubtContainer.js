@@ -1,43 +1,47 @@
 import React from 'react';
 import './TaDoubtContainer.css';
 import axios from 'axios';
-const URL = "http://localhost:8000/";
+import { message } from 'antd';
+const URL = "http://localhost:8000";
 
 const TaDoubtContainer = (props) => {
 
     function acceptDoubt(event) {
         console.log(event.target);
-        let currDoubt={};
-        props.doubts.map((item)=>{
-            if(item._id==event.target.value){
-                currDoubt=item;
-            }
-        })
-        console.log(currDoubt);
-        props.setSolvingDoubtData(currDoubt);
+
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
         const data = {
             doubtId: event.target.value,
-         }
-         axios
-            .post(URL + "doubt/accept-doubt", data)
+        }
+        axios
+            .post(URL + "/doubt/accept-doubt", data)
             .then((response) => {
-               console.log(response);
-               if (response.status === 200) {
-               }
-               // else message.error("Oops something is wrong! Contact dev team");
+                console.log(response);
+                if (response.status === 202) {
+                    let currDoubt={};
+                    props.doubts.map((item)=>{
+                        if(item._id===event.target.value){
+                            currDoubt=item;
+                        }
+                    });
+                    currDoubt['status']='inresolution'
+                    message.success("Doubt Accepted");
+                    props.setSolvingDoubtData(currDoubt);
+                    
+                } else if (response.status === 400) {
+                    message.warning("You already have a pending doubt");
+                }else{
+                    message.error("Cant Accept the Doubt");
+                }
             })
             .catch((error) => {
-               console.log("error is " + error);
-               // if (error.response && error.response.data.error)
-               //     message.error(error.response.data.error);
-               // else message.error("Something went wrong :(");
+                message.error("Cant Accept the Doubt");
             });
     }
 
     const doubtList = props.doubts.map((item) => {
-        if (item.status !== "active"){return null;}
-        const date1 = new Date(item.createdAt).toLocaleString().substring(0,5);
+        if (item.status !== "active") { return null; }
+        const date1 = new Date(item.createdAt).toLocaleString().substring(0, 5);
         // const date2 = new Date().toLocaleDateString;
         // var diffDays = parseInt((date2 - date1) / (1000 * 60 * 60 * 24), 10);
         let des = item.description;
@@ -70,10 +74,10 @@ const TaDoubtContainer = (props) => {
                     </div>
                     <div class="col-md-1 forum-info" >
                         <button type="button"
-                        value={item._id}
-                        onClick={acceptDoubt}
-                         style={{paddingRight:"7px",paddingLeft:"7px"}} class="btn btn-success">Accept</button>
-    
+                            value={item._id}
+                            onClick={acceptDoubt}
+                            style={{ paddingRight: "7px", paddingLeft: "7px" }} class="btn btn-success">Accept</button>
+
                     </div>
                 </div>
             </div>

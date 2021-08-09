@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { message } from 'antd';
 const URL = "http://localhost:8000";
+
 
 class NewCommentArea extends Component {
     constructor(props) {
@@ -29,15 +31,19 @@ class NewCommentArea extends Component {
         axios
             .post(URL + "/doubt/add-comment", data)
             .then((response) => {
-                console.log(response.data.comment);
                 if (response.status === 200) {
+                    message.success('Comment Added');
                     this.props.updateCommentList(response.data.comment);
+                }else{
+                    message.error('Failed to add comment');
                 }
+                
             })
             .catch((error) => {
                 if (error.response) {
                     console.log(error.response.data.error);
                   }
+                  message.error('Failed to add comment');
             });
     }
 

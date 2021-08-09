@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Cookies from 'js-cookie';
-
 import NavBar from '../Navbar/NavBar';
 import ContentBuilder from '../ContentBuilder';
 
@@ -17,6 +15,14 @@ class Layout extends Component {
         if(localStorage.getItem('token')){
             this.setState({welcomeName:localStorage.getItem('userType')})
         }
+    }
+
+    homeButtonClickedHandler=()=>{
+        console.log("moving to homepage");
+        const prevActiveContentArea=this.state.activeContentArea;
+        if(prevActiveContentArea==="") return;
+        this.setState({activeContentArea:""});
+
     }
 
     solveDoubtButtonHandler=()=>{
@@ -36,7 +42,12 @@ class Layout extends Component {
         this.setState({activeContentArea:'solvingdoubt'});
     }
     setSolvingDoubtData=(data)=>{
-        this.setState({solvingDoubtData:data});
+        if(data===''){
+            this.setState({solvingDoubtData:'',activeContentArea:'solvedoubts'});
+            return;
+        }
+
+        this.setState({solvingDoubtData:data,activeContentArea:'solvingdoubt'});
     }
 
     openDashboard=()=>{
@@ -100,10 +111,12 @@ class Layout extends Component {
                 logoutButtonHandler={this.logoutButtonHandler}
                 showTaDoubts={this.solveDoubtButtonHandler}
                 openDashboard={this.openDashboard}
-                solvingDoubt={this.solvingDoubtButtonHandler}/>
+                solvingDoubt={this.solvingDoubtButtonHandler}
+                homeButtonClickedHandler={this.homeButtonClickedHandler}/>
                 <ContentBuilder welcomeName={this.state.welcomeName} 
                 activeContentArea={this.state.activeContentArea}
                 setSolvingDoubtData={this.setSolvingDoubtData}
+                goToHomePage={this.homeButtonClickedHandler}
                 solvingDoubtData={this.state.solvingDoubtData}/>
             </div>
         );

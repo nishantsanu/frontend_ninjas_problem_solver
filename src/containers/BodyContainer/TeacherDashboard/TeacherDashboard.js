@@ -22,18 +22,19 @@ class TeacherDashboard extends Component {
             .get(URL + 'teacher/dashboard')
             .then((response) => {
                 console.log(response.data);
-                if (response.status == 200) {
-                    let data = response.data.taList;
+                //console.log(response.data.taList);
+                if (response.status === 200) {
+                    this.setState({ taList: response.data.taList });
                     let td = 0;
                     if (response.data.totalDoubt != null) {
                         td = response.data.totalDoubt
                     }
+                    console.log(response.data.averageTime);
                     this.setState({
                         totalDoubt: td,
                         totalEscalated: response.data.totalEscalated,
                         totalResolved: response.data.totalResolved,
                         averageTime: response.data.averageTime,
-                        taList: data
                     })
 
                 }
@@ -55,6 +56,23 @@ class TeacherDashboard extends Component {
                 else console.log("Something went wrong :(");
             });
     }
+    //count = 0;
+    getTaTable=()=>{
+        const taTable = this.state.taList.map((ta) => {
+            return (
+                <tr>
+                    <td>{ta.email}</td>
+                    <td>{ta.countAcceptedDoubt}</td>
+                    <td>{ta.countResolvedDoubt}</td>
+                    <td>{ta.countEscalatedDoubt}</td>
+                    <td>{(ta.solvedTime/ta.countAcceptedDoubt).toFixed(2)}</td>
+                </tr>
+            );
+    
+        })
+        return taTable;
+    }
+    
 
     render() {
         return (
@@ -102,7 +120,28 @@ class TeacherDashboard extends Component {
                         </div>
                     </div>
                 </div>
-
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Accepted</th>
+                            <th scope="col">Resolved</th>
+                            <th scope="col">Escalated</th>
+                            <th scope="col">Avg Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr> */}
+                       
+                        {this.getTaTable()}
+                    </tbody>
+                </table>
             </div>
         );
     }

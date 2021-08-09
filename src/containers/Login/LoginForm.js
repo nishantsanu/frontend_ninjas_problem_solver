@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './LoginForm.css';
 import axios from 'axios';
-import { message , Button,Space} from 'antd';
+import { message } from 'antd';
 
 const URL = "http://localhost:8000";
 
@@ -25,23 +25,24 @@ class LoginForm extends Component {
          .then((response) => {
             console.log(response);
             if (response.status === 200) {
-               message.success("Login Successful");
                localStorage.setItem('token', `Bearer ${response.data.data.token}`);
                localStorage.setItem('userType', response.data.user.userType);
                // document.cookie = `Bearer ${response.data.data.token}`;
                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
                axios.defaults.headers.common['Content-Type'] = 'application/json';
-
+               message.success('Login Successful');
                this.props.afterSuccessfulLogin(response.data.user);
             }
-            else message.error("Oops something is wrong! Contact dev team");
+            else{
+               message.error('Invalid Credential');
+            } 
          })
          .catch((error) => {
-            // message.error("Error signin in");
-            // console.log("errot is " + error);
             if (error.response && error.response.data.error)
-               message.error(error.response.data.error);
-            else message.error("Something went wrong :(");
+               console.log(error.response.data.error);
+            else console.log("Something went wrong :(");
+
+            message.error("Something went wrong");
          });
    }
    dropDownHandler=(event)=>{

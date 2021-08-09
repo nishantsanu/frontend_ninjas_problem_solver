@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './SolvingDoubt.css';
+import { message } from 'antd';
 const URL = "http://localhost:8000";
 
 class SolvingDoubt extends Component {
@@ -16,11 +17,47 @@ class SolvingDoubt extends Component {
     }
     onSubmitAnswer=()=>{
         console.log(this.state.answer);
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        const data = {
+           doubt: this.props.solvingDoubtData._id,
+           answer:this.state.answer,
+        }
+        axios
+           .post(URL + "/doubt/solved-doubt", data,)
+           .then((response) => {
+              console.log(response);
+              if (response.status === 200) {
+                  message.success('Answer Posted');
+                  this.props.setSolvingDoubtData('');
+              }else{
+                message.error('Something is missing');
+              }
+           })
+           .catch((error) => {
+              message.error('Oops! Cant Post the Answer');
+           });
         return;
     }
 
     onEscalateDoubt=()=>{
-        console.log("escalating doubt");
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        const data = {
+           doubt: this.props.solvingDoubtData._id,
+        }
+        axios
+           .post(URL + "/doubt/escalate-doubt", data,)
+           .then((response) => {
+              console.log(response);
+              if (response.status === 200) {
+                  message.success('Doubt Escalated! Solve another')
+                  this.props.setSolvingDoubtData('');
+              }else{
+                message.warn('Something is wrong');
+              }
+           })
+           .catch((error) => {
+              message.error('Opps, there is some issue');
+           });
         return;
     }
 
@@ -36,8 +73,6 @@ class SolvingDoubt extends Component {
                         <div class="upperband">
                             <h5 class="card-title"
                             >{this.props.solvingDoubtData.title}</h5>
-                            {/* <div>{this.props.solvingDoubtData.status} */}
-                            {/* </div> */}
                         </div>
 
                         <p class="card-text">{this.props.solvingDoubtData.description}</p>

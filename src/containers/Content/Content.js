@@ -5,12 +5,12 @@ import './Content.css';
 
 
 const Content = (props) => {
-    const ingredientSummary = props.posts
+    const commentSummary = props.posts
         .map(item => {
             const commentView = item.comments.map(singleComment => {
-                return (<li style={{ listStyleType: "none" }} key={singleComment._id}>
-                    <input type="email" readOnly
-                        value={singleComment.description} style={{marginTop:10, borderRadius:5,color:'black' }}class="form-control"placeholder="" />
+                return (<li style={{ listStyleType: "none",marginLeft:0, }} key={singleComment._id}>
+                    <input type="text" readOnly
+                        value={singleComment.commentatorName +" : "+singleComment.description} style={{ marginTop:10, borderRadius:5,color:'black' }}class="form-control"placeholder="" />
 
                 </li>);
             })
@@ -27,7 +27,7 @@ const Content = (props) => {
                         <p class="card-text">{item.description}</p>
                         <div><span className="askedby"><strong>Asked By : {item.postedBy.email}</strong> on {item.createdAt.toLocaleString().substring(0, 10)}</span></div>
                         <hr></hr>
-                        <ul>
+                        <ul style={{paddingLeft:15}}>
                             {commentView}
                         </ul>
                         {props.welcomeName ? <NewCommentArea
@@ -41,7 +41,7 @@ const Content = (props) => {
     return (
         <Auxx class="mainbg">
             <ul style={{ listStyleType: "none" }} className="ulpost">
-                {ingredientSummary}
+                {commentSummary}
             </ul>
         </Auxx>
 
