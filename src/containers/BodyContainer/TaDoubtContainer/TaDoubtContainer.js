@@ -16,7 +16,6 @@ const TaDoubtContainer = (props) => {
         axios
             .post(URL + "/doubt/accept-doubt", data)
             .then((response) => {
-                console.log(response);
                 if (response.status === 202) {
                     let currDoubt={};
                     props.doubts.map((item)=>{

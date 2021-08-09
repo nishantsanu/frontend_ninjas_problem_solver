@@ -13,17 +13,14 @@ class LoginForm extends Component {
    }
    proceedToSignIn = async (e) => {
 
-      console.log("proceed to signin");
       const data = {
          email: this.state.email,
          password: this.state.password,
          userType: this.state.userType,
       }
-      console.log(data);
       axios
          .post(URL + "/create-session", data)
          .then((response) => {
-            console.log(response);
             if (response.status === 200) {
                localStorage.setItem('token', `Bearer ${response.data.data.token}`);
                localStorage.setItem('userType', response.data.user.userType);
@@ -37,15 +34,10 @@ class LoginForm extends Component {
             } 
          })
          .catch((error) => {
-            if (error.response && error.response.data.error)
-               console.log(error.response.data.error);
-            else console.log("Something went wrong :(");
-
             message.error("Something went wrong");
          });
    }
    dropDownHandler=(event)=>{
-      console.log(event.target.value);
       this.setState({ userType: event.target.value });
    }
    emailHandler = (event) => {

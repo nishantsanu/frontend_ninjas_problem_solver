@@ -18,7 +18,6 @@ class Layout extends Component {
     }
 
     homeButtonClickedHandler=()=>{
-        console.log("moving to homepage");
         const prevActiveContentArea=this.state.activeContentArea;
         if(prevActiveContentArea==="") return;
         this.setState({activeContentArea:""});
@@ -32,7 +31,6 @@ class Layout extends Component {
         this.setState({activeContentArea:'solvedoubts'});
     }
     solvingDoubtButtonHandler=()=>{
-        console.log("inside solving doubt button handler");
         if(!this.state.solvingDoubtData['_id']){
             return;
         }
@@ -82,7 +80,6 @@ class Layout extends Component {
         })
     }
     afterSuccessfulLogin=(user)=>{
-        console.log(user);
         this.backDropClickHandler();
         this.setState({
             welcomeName:user.userType

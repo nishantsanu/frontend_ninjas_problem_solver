@@ -25,7 +25,6 @@ class RaiseDoubtContainer extends Component {
         axios
             .post(URL + "/create-doubt", data,)
             .then((response) => {
-                console.log(response);
                 if (response.status === 201) {
                     ;
                     this.props.addNewDoubt(response.data.doubt);

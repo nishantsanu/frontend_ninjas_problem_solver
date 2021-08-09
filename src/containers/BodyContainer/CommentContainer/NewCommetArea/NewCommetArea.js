@@ -15,13 +15,11 @@ class NewCommentArea extends Component {
       }
 
     addCommentHandler = async () => {
-        console.log("proceed to signin");
         const data = {
             parentDoubt: this.props.parentPost,
             commentDescription: this.state.comment,
         }
         
-        console.log(data);
         axios.defaults.headers.common['Authorization']=localStorage.getItem('token');
         axios
             .post(URL + "/doubt/add-comment", data)
@@ -36,7 +34,6 @@ class NewCommentArea extends Component {
             })
             .catch((error) => {
                 if (error.response) {
-                    console.log(error.response.data.error);
                   }
                   message.error('Failed to add comment');
             });

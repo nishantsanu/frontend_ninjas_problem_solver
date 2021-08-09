@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './TeacherDashboard.css';
+import { message } from 'antd';
 const URL = "https://ninjasproblemsolver.herokuapp.com";
 
 class TeacherDashboard extends Component {
@@ -27,7 +28,6 @@ class TeacherDashboard extends Component {
                     if (response.data.totalDoubt != null) {
                         td = response.data.totalDoubt
                     }
-                    console.log(response.data.averageTime);
                     this.setState({
                         totalDoubt: td,
                         totalEscalated: response.data.totalEscalated,
@@ -38,10 +38,7 @@ class TeacherDashboard extends Component {
                 }
             })
             .catch((error) => {
-                console.log(error);
-                if (error.response && error.response.data.error)
-                    console.log(error.response.data.error);
-                else console.log("Something went wrong :(");
+                message.error("Error Fetching Dashboard")
             });
     }
     getTaTable=()=>{

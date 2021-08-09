@@ -5,12 +5,12 @@ import LoginForm from '../Login/LoginForm';
 import SignupForm from '../SignUp/SignupForm';
 import axios from 'axios';
 import './NavBar.css';
+import { message } from 'antd';
 const URL = "https://ninjasproblemsolver.herokuapp.com";
 
 const navbar = (props) => {
 
     function logoutButtonClicked() {
-        console.log("logout clicked");
         localStorage.setItem('token', '');
         localStorage.setItem('userType', '');
 
@@ -18,13 +18,12 @@ const navbar = (props) => {
         axios
             .post(URL + "/destroy-session")
             .then((response) => {
-                console.log(response);
                 axios.defaults.headers.common['Authorization'] = null;
                 if (response.status === 200) {
+                    message.success("Logout Successful");
                 }
             })
             .catch((error) => {
-                console.log("error is " + error);
             });
 
         props.logoutButtonHandler()

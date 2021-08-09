@@ -22,22 +22,15 @@ class ContentBuilder extends Component {
         axios
             .get(URL)
             .then((response) => {
-                console.log(response.data.doubts);
                 let data = response.data.doubts;
                 this.setState({ post: data });
             })
             .catch((error) => {
-                console.log(error);
-                if (error.response && error.response.data.error)
-                    console.log(error.response.data.error);
-                else console.log("Something went wrong :(");
             });
     }
 
     updateCommentList=(comment)=>{
-        console.log("inside update comment list");
         if(!comment) return;
-        console.log("comment present");
         const parent=comment.parentDoubt;
         const newList=[];
         this.state.post.forEach(post => {
@@ -49,7 +42,6 @@ class ContentBuilder extends Component {
                 newList.push(post);
             }
         });
-        console.log("new List is "+newList);
 
         this.setState({posts:newList});
     }
@@ -64,7 +56,6 @@ class ContentBuilder extends Component {
     }
 
     containerToView = () => {
-        console.log("container to view is " + this.props.activeContentArea);
         if(this.props.activeContentArea==='solvedoubts'){
             return <TaDoubtContainer doubts={this.state.post} setSolvingDoubtData={this.props.setSolvingDoubtData}/>
         }else if(this.props.activeContentArea==='dashboard'){

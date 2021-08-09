@@ -16,7 +16,6 @@ class SolvingDoubt extends Component {
 
     }
     onSubmitAnswer=()=>{
-        console.log(this.state.answer);
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
         const data = {
            doubt: this.props.solvingDoubtData._id,
@@ -25,7 +24,6 @@ class SolvingDoubt extends Component {
         axios
            .post(URL + "/doubt/solved-doubt", data,)
            .then((response) => {
-              console.log(response);
               if (response.status === 200) {
                   message.success('Answer Posted');
                   this.props.setSolvingDoubtData('');
@@ -47,7 +45,6 @@ class SolvingDoubt extends Component {
         axios
            .post(URL + "/doubt/escalate-doubt", data,)
            .then((response) => {
-              console.log(response);
               if (response.status === 200) {
                   message.success('Doubt Escalated! Solve another')
                   this.props.setSolvingDoubtData('');

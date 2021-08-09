@@ -12,13 +12,11 @@ class SignupForm extends Component {
     }
     proceedToSignUp = async (e) => {
 
-        console.log("proceed to signup");
         const data = {
             email: this.state.email,
             password: this.state.password,
             userType: this.state.userType
         }
-        console.log(data);
         axios
             .post(URL + "/create-user", {
                 email: this.state.email,
@@ -26,9 +24,8 @@ class SignupForm extends Component {
                 userType: this.state.userType
             }, { withCredentials: true })
             .then((response) => {
-                console.log(response);
                 if (response.status === 201) {
-                    console.log("signup success");
+                    message.success('Sign Up Successful');
                     localStorage.setItem('token', `Bearer ${response.data.data.token}`);
                     localStorage.setItem('userType', response.data.user.userType);
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
@@ -36,17 +33,12 @@ class SignupForm extends Component {
 
                     this.props.afterSuccessfulLogin(response.data.user);
                 }
-                // else message.error("Oops something is wrong! Contact dev team");
             })
             .catch((error) => {
-                console.log("errot is " + error);
-                if (error.response && error.response.data.error)
-                    message.error(error.response.data.error);
-                else message.error("Something went wrong :(");
+                message.error('Failed to sign up');
             });
     }
     dropDownHandler = (event) => {
-        console.log(event.target.value);
         this.setState({ userType: event.target.value });
     }
     emailHandler = (event) => {
