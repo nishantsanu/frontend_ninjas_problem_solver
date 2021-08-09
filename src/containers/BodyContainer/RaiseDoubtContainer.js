@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './RaiseDoubtContainer.css';
 import { message } from 'antd';
-const URL = "http://localhost:8000";
+const URL = "https://ninjasproblemsolver.herokuapp.com";
 
 class RaiseDoubtContainer extends Component {
     state = {

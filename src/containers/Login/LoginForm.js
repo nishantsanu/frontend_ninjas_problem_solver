@@ -3,7 +3,7 @@ import './LoginForm.css';
 import axios from 'axios';
 import { message } from 'antd';
 
-const URL = "http://localhost:8000";
+const URL = "https://ninjasproblemsolver.herokuapp.com";
 
 class LoginForm extends Component {
    state = {

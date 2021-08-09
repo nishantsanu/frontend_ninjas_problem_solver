@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { message } from 'antd';
-const URL = "http://localhost:8000";
+const URL = "https://ninjasproblemsolver.herokuapp.com";
 
 
 class NewCommentArea extends Component {

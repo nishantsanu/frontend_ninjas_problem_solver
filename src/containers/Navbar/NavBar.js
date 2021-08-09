@@ -5,7 +5,7 @@ import LoginForm from '../Login/LoginForm';
 import SignupForm from '../SignUp/SignupForm';
 import axios from 'axios';
 import './NavBar.css';
-const URL = "http://localhost:8000";
+const URL = "https://ninjasproblemsolver.herokuapp.com";
 
 const navbar = (props) => {
 

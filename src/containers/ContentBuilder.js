@@ -6,7 +6,7 @@ import TaDoubtContainer from './BodyContainer/TaDoubtContainer/TaDoubtContainer'
 import TeacherDashboard from './BodyContainer/TeacherDashboard/TeacherDashboard';
 import SolvingDoubt from './BodyContainer/TaDoubtContainer/SolvingDoubt';
 
-const URL='http://localhost:8000';
+const URL='https://ninjasproblemsolver.herokuapp.com/';
 class ContentBuilder extends Component {
     state = {
         post: [],

@@ -2,7 +2,7 @@ import React from 'react';
 import './TaDoubtContainer.css';
 import axios from 'axios';
 import { message } from 'antd';
-const URL = "http://localhost:8000";
+const URL = "https://ninjasproblemsolver.herokuapp.com";
 
 const TaDoubtContainer = (props) => {
 
