@@ -1,0 +1,19 @@
+.header{
+    width: 100%;
+    height: 50px;
+    background-color: #2F154C;
+/* font-weight: bold; */
+    color: whitesmoke;
+    position: fixed;
+    top:0;
+    margin-bottom: 20px;
+    z-index: 100;
+}
+#logo {
+    height: 80%;
+
+  }
+
+.header a{
+    color: whitesmoke;
+}
