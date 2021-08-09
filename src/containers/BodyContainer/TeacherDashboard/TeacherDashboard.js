@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './TeacherDashboard.css';
-const URL = "http://localhost:8000/";
+const URL = "https://ninjasproblemsolver.herokuapp.com";
 
 class TeacherDashboard extends Component {
     state = {
@@ -19,10 +19,8 @@ class TeacherDashboard extends Component {
     getTeacherDashboard = () => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
         axios
-            .get(URL + 'teacher/dashboard')
+            .get(URL + '/teacher/dashboard')
             .then((response) => {
-                console.log(response.data);
-                //console.log(response.data.taList);
                 if (response.status === 200) {
                     this.setState({ taList: response.data.taList });
                     let td = 0;
@@ -38,16 +36,6 @@ class TeacherDashboard extends Component {
                     })
 
                 }
-                // // let idx = 0;
-                // let data = response.data.doubts;
-                // // console.log(data);
-                // data.forEach((element) => {
-                //     console.log("small element");
-                //     console.log(element);
-                //     // element["key"] = idx++;
-                // });
-                // console.log(data);
-                // this.setState({ post: data });
             })
             .catch((error) => {
                 console.log(error);
@@ -56,7 +44,6 @@ class TeacherDashboard extends Component {
                 else console.log("Something went wrong :(");
             });
     }
-    //count = 0;
     getTaTable=()=>{
         const taTable = this.state.taList.map((ta) => {
             return (
@@ -131,14 +118,6 @@ class TeacherDashboard extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr> */}
-                       
                         {this.getTaTable()}
                     </tbody>
                 </table>

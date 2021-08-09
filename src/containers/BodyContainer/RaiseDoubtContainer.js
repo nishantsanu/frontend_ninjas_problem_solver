@@ -49,7 +49,6 @@ class RaiseDoubtContainer extends Component {
                             <div class="form_main">
                                 <h2 class="heading"><strong>Raise </strong> Doubt <span></span></h2>
                                 <div class="form">
-                                    {/* <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm"> */}
                                     <h4 class=""><strong>Title </strong></h4>
                                     <input onChange={this.onTitleChange}
                                         value={this.state.title}
@@ -60,7 +59,7 @@ class RaiseDoubtContainer extends Component {
                                         placeholder="Your Message" name="mess" type="text" style={{ height: 150 }} class="txt_3"></textarea>
                                     <input onClick={this.submitDoubt}
                                         type="submit" value="submit" name="submit" class="txt2" style={{ background: "#2F154C" }} />
-                                    {/* </form> */}
+
                                 </div>
                             </div>
                         </div>

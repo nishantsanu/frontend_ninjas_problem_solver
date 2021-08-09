@@ -13,7 +13,6 @@ const navbar = (props) => {
         console.log("logout clicked");
         localStorage.setItem('token', '');
         localStorage.setItem('userType', '');
-        // document.cookie = `Bearer ${response.data.data.token}`;
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
         axios
@@ -55,10 +54,8 @@ const navbar = (props) => {
             <LoginForm showLoginForm={props.showLoginForm} afterSuccessfulLogin={props.afterSuccessfulLogin} />
             <SignupForm showSignUpForm={props.showSignUpForm} afterSuccessfulLogin={props.afterSuccessfulLogin} />
             <nav class="navbar navbar-expand-sm  header">
-                {/* <a class="navbar-brand" href="#"> */}
                 <img src="https://files.codingninjas.in/new-logo-03-11984.svg" id="logo" />
 
-                {/* </a> */}
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

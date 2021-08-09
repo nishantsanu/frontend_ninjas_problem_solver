@@ -27,7 +27,6 @@ class LoginForm extends Component {
             if (response.status === 200) {
                localStorage.setItem('token', `Bearer ${response.data.data.token}`);
                localStorage.setItem('userType', response.data.user.userType);
-               // document.cookie = `Bearer ${response.data.data.token}`;
                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`
                axios.defaults.headers.common['Content-Type'] = 'application/json';
                message.success('Login Successful');
@@ -49,9 +48,6 @@ class LoginForm extends Component {
       console.log(event.target.value);
       this.setState({ userType: event.target.value });
    }
-   // userTypeHandler = (event) => {
-   //    this.setState({ userType: event.target.value });
-   // }
    emailHandler = (event) => {
       this.setState({ email: event.target.value });
    }
@@ -69,11 +65,6 @@ class LoginForm extends Component {
                <option value="ta">Teachin Assistant</option>
                <option value="teacher">Teacher</option>
             </select>
-            {/* <div class="form-group">
-               <label>User Type</label>
-               <input value={this.state.userType} onChange={this.userTypeHandler}
-                  type="text" style={{ width: "70%" }} class="form-control" placeholder="ta/student/teacher" />
-            </div> */}
             <div class="login-form">
                <div class="form-group">
                   <label>User Name</label>
@@ -92,8 +83,6 @@ class LoginForm extends Component {
                <button
                   onClick={this.proceedToSignIn}
                   type="input" class="btn btn-success">Login</button>
-
-               {/* </div> */}
             </div>
          </div>
 

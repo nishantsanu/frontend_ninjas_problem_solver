@@ -13,10 +13,6 @@ class NewCommentArea extends Component {
         }
         this.commentInputHandle = this.commentInputHandle.bind(this)
       }
-      
-    // state = {
-    //     comment: '',
-    // }
 
     addCommentHandler = async () => {
         console.log("proceed to signin");
@@ -27,7 +23,6 @@ class NewCommentArea extends Component {
         
         console.log(data);
         axios.defaults.headers.common['Authorization']=localStorage.getItem('token');
- //       axios.defaults.headers.common['Content-Type']='application/json';
         axios
             .post(URL + "/doubt/add-comment", data)
             .then((response) => {
@@ -55,7 +50,6 @@ class NewCommentArea extends Component {
             <div class="container my-5">
                 <div class="row">
                     <div class="col-md-12">
-                        {/* <form class="form-inline" accept-charset="UTF-8"  > */}
                             <div class="input-group flex-fill">
                                 <input onChange={this.commentInputHandle}
                                 
@@ -65,7 +59,6 @@ class NewCommentArea extends Component {
                                         type="submit" name="commit" style={{backgroundColor: "#0A6DFE"}} value="Comment" class="btn btn-primary !btnboot" data-disable-with="Search" />
                                 </div>
                             </div>
-                        {/* </form> */}
                     </div>
                 </div>
             </div>

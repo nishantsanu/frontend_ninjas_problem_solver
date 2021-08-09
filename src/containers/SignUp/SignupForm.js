@@ -49,9 +49,6 @@ class SignupForm extends Component {
         console.log(event.target.value);
         this.setState({ userType: event.target.value });
     }
-    // userTypeHandler = (event) => {
-    //     this.setState({ userType: event.target.value });
-    // }
     emailHandler = (event) => {
         this.setState({ email: event.target.value });
     }
@@ -62,7 +59,6 @@ class SignupForm extends Component {
     render() {
         return (
             <div class="signupdiv" hidden={!this.props.showSignUpForm}>
-                {/* <div class="col-md-6 col-sm-12"> */}
                 <h4>Signup at CodingNinjas</h4>
                 <div class="login-form">
                     <select onChange={this.dropDownHandler} class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
@@ -71,11 +67,6 @@ class SignupForm extends Component {
                         <option value="ta">Teachin Assistant</option>
                         <option value="teacher">Teacher</option>
                     </select>
-                    {/* <div class="form-group">
-                        <label>User Type</label>
-                        <input value={this.state.userType} onChange={this.userTypeHandler}
-                            type="text" style={{ width: "70%" }} class="form-control" placeholder="ta/student/teacher" />
-                    </div> */}
                     <div class="form-group">
                         <label>Email</label>
                         <input value={this.state.email}
@@ -89,8 +80,7 @@ class SignupForm extends Component {
                             type="password" style={{ width: "70%" }} class="form-control" placeholder="Password" />
                     </div>
                     <button type="input" class="btn btn-success" onClick={this.proceedToSignUp} >Sign Up</button>
-                    {/* </form> */}
-                    {/* </div> */}
+                
                 </div>
             </div>
 

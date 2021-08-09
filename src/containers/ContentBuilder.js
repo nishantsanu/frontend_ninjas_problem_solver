@@ -78,10 +78,6 @@ class ContentBuilder extends Component {
             loginButtonClick={this.loginModelHandler} 
             updateCommentList={this.updateCommentList}/>
         }
-        // return this.props.activeContentArea !== "raisedoubt" ?
-        //     <Content posts={this.state.post} welcomeName={this.props.welcomeName} showBackdrop={this.state.showBackdrop}
-        //         loginButtonClick={this.loginModelHandler} 
-        //         updateCommentList={this.updateCommentList}/> : <RaiseDoubtContainer />
     }
 
     loginModelHandler = () => {

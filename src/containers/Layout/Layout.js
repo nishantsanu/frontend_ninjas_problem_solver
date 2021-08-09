@@ -89,10 +89,6 @@ class Layout extends Component {
         })
     }
     raiseDoubt=()=>{
-        console.log("raising doubt "+this.state.activeContentArea);
-        // if(this.state.activeContentArea==="raisedoubt"){
-        //     return;
-        // }
         this.setState({activeContentArea:"raisedoubt"})
     }
     render() {

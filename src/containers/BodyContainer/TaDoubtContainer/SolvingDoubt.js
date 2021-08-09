@@ -91,8 +91,6 @@ class SolvingDoubt extends Component {
                     <div class="card-body" style={{ background: "#b593cc54" }}>
                         <div class="upperband">
                             <h5 class="card-title">You can solve it</h5>
-                            {/* <div>{this.props.solvingDoubtData.status} */}
-                            {/* </div> */}
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Answer Area</label>
